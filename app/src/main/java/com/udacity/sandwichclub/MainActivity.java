@@ -12,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.udacity.sandwichclub.RecyclerUtils.Sendwich_Adapter;
+import com.udacity.sandwichclub.model.Sandwich;
+import com.udacity.sandwichclub.utils.JsonUtils;
+
+import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,30 +30,23 @@ public class MainActivity extends AppCompatActivity {
         rvList = (RecyclerView) findViewById(R.id.rv_sendwich_list);
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_names);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, sandwiches);
+        String[] image = new String[sandwiches.length];
 
-        // Simplification: Using a ListView instead of a RecyclerView
-        ListView listView = findViewById(R.id.sandwiches_listview);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                launchDetailActivity(position);
+        for(int position = 0; position < sandwiches.length; position++) {
+            String[] sandwichesDetails = getResources().getStringArray(R.array.sandwich_details);
+            String json = sandwichesDetails[position];
+            Sandwich sandwich = null;
+            try {
+                sandwich = JsonUtils.parseSandwichJson(json);
+                String temp = sandwich.getImage();
+                image[position] = temp;
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-
+        }
 
         Sendwich_Adapter adapterRv = new Sendwich_Adapter(this,sandwiches,image);
         rvList.setAdapter(adapterRv);
         rvList.setLayoutManager(new LinearLayoutManager(this));
-
-    }
-
-    private void launchDetailActivity(int position) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_POSITION, position);
-        Log.d(TAG, "launchDetailActivity: Firing Intent...");
-        startActivity(intent);
     }
 }

@@ -87,11 +87,17 @@ public class DetailActivity extends AppCompatActivity {
 
         tvDescription.setText(description);
         tvOrigin.setText(origin);
+        boolean flag = true;
         for(String x : ingrediants){
-            tvIngrediants.append(x+"\n");
+            if(flag == true) {tvIngrediants.append(x);flag = false;}
+            else{
+            tvIngrediants.append("\n"+x);}
         }
+        flag = true;
         for(String x : alsoKnownAs){
-            tvAlsoKnownAs.append(x);
+            if(flag == true) {tvAlsoKnownAs.append(x);flag = false;}
+            else{
+            tvAlsoKnownAs.append("\n"+x);}
         }
     }
 }
