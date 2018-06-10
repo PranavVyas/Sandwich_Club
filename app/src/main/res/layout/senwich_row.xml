@@ -17,7 +17,7 @@
         android:layout_marginTop="8dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="16dp"
-        app:contentPadding="16dp"
+        app:contentPadding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
             <ImageView
                 android:id="@+id/iv_photo_main"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"

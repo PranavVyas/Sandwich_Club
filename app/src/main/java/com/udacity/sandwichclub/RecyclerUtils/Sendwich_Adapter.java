@@ -39,6 +39,8 @@ public class Sendwich_Adapter extends RecyclerView.Adapter<Sendwich_Adapter.Hold
         holder.tvname.setText(names[position]);
         Picasso.with(ct)
                 .load(images[position])
+                .placeholder(R.drawable.hamburger)
+                .error(R.drawable.hamburger)
                 .into(holder.ivPhoto);
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
